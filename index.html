@@ -20,6 +20,7 @@
     --muted: #857a68;
     --amber: #b0611a;
     --amber-soft: #f6ead9;
+    --on-accent: #ffffff;
     --teal: #0f766e;
     --teal-soft: #dbeeec;
     --shadow: 0 1px 2px rgba(28,24,19,.05), 0 12px 30px -18px rgba(28,24,19,.25);
@@ -39,7 +40,7 @@
       --ink-soft: #c3bbaa;
       --muted: #8f8474;
       --amber: #e8974c;
-      --amber-soft: #2a2013;
+      --amber-soft: #2a2013; --on-accent: #1a1611;
       --teal: #47b8ab;
       --teal-soft: #12241f;
       --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -22px rgba(0,0,0,.7);
@@ -54,7 +55,7 @@
     --ink-soft: #c3bbaa;
     --muted: #8f8474;
     --amber: #e8974c;
-    --amber-soft: #2a2013;
+    --amber-soft: #2a2013; --on-accent: #1a1611;
     --teal: #47b8ab;
     --teal-soft: #12241f;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -22px rgba(0,0,0,.7);
@@ -229,6 +230,11 @@
   @media (max-width: 780px){ .exp-side { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 22px; } }
   .exp-side .lbl { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
   .exp-side .proj-name { font-family: var(--display); font-weight: 700; font-size: 16px; margin-top: 6px; }
+  .exp-side .proj-item { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--line); }
+  .exp-side .proj-item:first-of-type { margin-top: 8px; padding-top: 0; border-top: 0; }
+  .exp-side .proj-cur { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--teal); background: var(--teal-soft); border: 1px solid color-mix(in srgb, var(--teal) 30%, var(--line));
+    padding: 2px 7px; border-radius: 999px; margin-left: 6px; font-weight: 600; white-space: nowrap; }
   .exp-side p { font-size: 13.5px; color: var(--ink-soft); margin-top: 8px; }
   .exp-side .client { display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; font-family: var(--mono); font-size: 12px; color: var(--ink); }
   .exp-side .client b { color: var(--teal); }
@@ -249,6 +255,32 @@
   .foot-in { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
   .foot-note { font-family: var(--mono); font-size: 12px; color: var(--muted); max-width: 52ch; line-height: 1.7; }
 
+  /* contact */
+  #contact .contact-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  .cbtn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 12px;
+    font-family: var(--mono); font-size: 14px; font-weight: 600; letter-spacing: .01em; text-decoration: none;
+    border: 1px solid var(--line); transition: transform .15s ease, border-color .15s, background .15s; cursor: pointer; }
+  .cbtn svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .cbtn.primary { background: var(--amber); border-color: var(--amber); color: var(--on-accent); }
+  .cbtn.primary:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--amber) 88%, #000); }
+  .cbtn.ghost { background: var(--surface); color: var(--ink); }
+  .cbtn.ghost:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--amber) 45%, var(--line)); }
+  .contact-secondary { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .clink { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft);
+    font-family: var(--mono); font-size: 12.5px; text-decoration: none; transition: color .15s, border-color .15s; }
+  .clink svg { width: 15px; height: 15px; }
+  .clink:hover { color: var(--amber); border-color: color-mix(in srgb, var(--amber) 45%, var(--line)); }
+  /* footer social */
+  .foot-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+  @media (max-width: 640px){ .foot-right { align-items: flex-start; } }
+  .foot-social { display: flex; gap: 10px; align-items: center; }
+  .foot-social a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px;
+    border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+    transition: color .15s, border-color .15s, transform .15s; }
+  .foot-social a svg { width: 17px; height: 17px; }
+  .foot-social a:hover { color: var(--amber); border-color: color-mix(in srgb, var(--amber) 45%, var(--line)); transform: translateY(-2px); }
+
   [hidden] { display: none !important; }
   @media (prefers-reduced-motion: reduce){ * { transition: none !important; } }
 </style>
@@ -263,6 +295,7 @@
       <a href="#stack" data-i18n="nav_stack">Stack</a>
       <a href="#projects" data-i18n="nav_projects">Projetos</a>
       <a href="#approach" data-i18n="nav_approach">Como trabalho</a>
+      <a href="#contact" data-i18n="nav_contact">Contact</a>
     </nav>
     <div class="ctl" role="group" aria-label="Language">
       <button id="lang-pt" aria-pressed="true">PT</button>
@@ -353,6 +386,23 @@
       <div class="prin-grid" id="prin-grid"></div>
     </div>
   </section>
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow" data-i18n="contact_eyebrow">Contact</div>
+        <h2 data-i18n="contact_title">Let's talk</h2>
+        <p data-i18n="contact_sub">Open to opportunities, collaborations and technical exchanges. Reach out on WhatsApp or drop me an email.</p>
+      </div>
+      <div class="contact-actions">
+        <a id="wa-link" class="cbtn primary" href="https://wa.me/5543996190345" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.94.95-3.48-.22-.36a9.38 9.38 0 0 1 14.6-11.53 9.32 9.32 0 0 1 2.75 6.64c0 5.18-4.22 9.4-9.4 9.4zM20.5 3.5A11.34 11.34 0 0 0 12.05.02C5.8.02.72 5.1.72 11.35c0 2 .52 3.95 1.52 5.67L.62 23.4l6.53-1.71a11.3 11.3 0 0 0 5.4 1.38h.01c6.25 0 11.33-5.08 11.33-11.33 0-3.03-1.18-5.88-3.32-8.02z"/></svg><span data-i18n="contact_wa">WhatsApp</span></a>
+        <a id="email-link" class="cbtn ghost" href="mailto:guizcanesin@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span data-i18n="contact_email">Email</span></a>
+      </div>
+      <div class="contact-secondary">
+        <a class="clink" href="https://www.linkedin.com/in/guilherme-zago-canesin/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.71h.05c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg>LinkedIn</a>
+        <a class="clink" href="https://github.com/GuilhermeZCanesin" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5z"/></svg>GitHub</a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -361,7 +411,15 @@
       <div class="brand" style="font-size:16px;">Guilherme Zago</div>
       <p class="foot-note" data-i18n="foot_note" style="margin-top:8px;"></p>
     </div>
-    <div class="eyebrow" data-i18n="foot_tag">Disponível para conversas</div>
+    <div class="foot-right">
+      <div class="eyebrow" data-i18n="foot_tag">Open to conversations</div>
+      <div class="foot-social">
+        <a href="https://wa.me/5543996190345" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.94.95-3.48-.22-.36a9.38 9.38 0 0 1 14.6-11.53 9.32 9.32 0 0 1 2.75 6.64c0 5.18-4.22 9.4-9.4 9.4zM20.5 3.5A11.34 11.34 0 0 0 12.05.02C5.8.02.72 5.1.72 11.35c0 2 .52 3.95 1.52 5.67L.62 23.4l6.53-1.71a11.3 11.3 0 0 0 5.4 1.38h.01c6.25 0 11.33-5.08 11.33-11.33 0-3.03-1.18-5.88-3.32-8.02z"/></svg></a>
+        <a href="mailto:guizcanesin@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+        <a href="https://www.linkedin.com/in/guilherme-zago-canesin/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.71h.05c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg></a>
+        <a href="https://github.com/GuilhermeZCanesin" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.26 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5z"/></svg></a>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -373,12 +431,12 @@
       nav_experience: "Experiência", nav_stack: "Stack", nav_projects: "Projetos", nav_approach: "Como trabalho",
       hero_eyebrow: "Engenheiro de Software Sênior",
       hero_role: "Full-stack · Angular & TypeScript",
-      hero_lede: "Engenheiro full-stack com mais de 5 anos construindo aplicações web — Angular no front, Node.js/REST no back. Sou líder técnico de front-end para um cliente nos EUA e, em paralelo, projeto e opero um ecossistema próprio de serviços self-hosted que me mantém hands-on em toda a stack.",
-      hero_m1: "Curitiba, Brasil", hero_m2: "Líder técnico de front-end", hero_m3: "Infra self-hosted própria",
+      hero_lede: "Engenheiro full-stack com mais de 5 anos construindo aplicações web — Angular no front, Node.js/REST no back. Trabalho para um cliente nos EUA, onde atuei como tech lead no projeto Outage Scoping Optimization, e em paralelo projeto e opero um ecossistema próprio de serviços self-hosted que me mantém hands-on em toda a stack.",
+      hero_m1: "Curitiba, Brasil", hero_m2: "Tech lead — Outage Scoping Optimization", hero_m3: "Infra self-hosted própria",
       stats: [["5+","Anos de experiência"],["15+","Aplicações próprias"],["7","Domínios técnicos"],["1","Homelab operado"]],
       exp_eyebrow: "Experiência profissional",
-      exp_title: "Liderança técnica em produto de missão crítica",
-      exp_sub: "Mais de cinco anos entregando software para produção, atualmente como líder técnico de front-end para um cliente nos Estados Unidos.",
+      exp_title: "Entregando um produto de missão crítica para um cliente nos EUA",
+      exp_sub: "Mais de cinco anos entregando software para produção para um cliente nos Estados Unidos, onde assumi o papel de tech lead no projeto Outage Scoping Optimization.",
       stack_eyebrow: "Stack técnico",
       stack_title: "Uma stack que vai da tela ao servidor",
       stack_sub: "Angular e TypeScript no centro, cercados por tudo que é preciso para colocar um produto no ar e mantê-lo — inclusive a infraestrutura.",
@@ -391,18 +449,26 @@
       appr_title: "Princípios que atravessam todos os projetos",
       foot_note: "Ecossistema pessoal de software — projetado, desenvolvido e operado do zero. Nenhum detalhe de infraestrutura sensível é exposto aqui.",
       foot_tag: "Disponível para conversas",
+      nav_contact: "Contato",
+      contact_eyebrow: "Contato",
+      contact_title: "Vamos conversar",
+      contact_sub: "Aberto a oportunidades, colaborações e trocas técnicas. Chame no WhatsApp ou mande um email.",
+      contact_wa: "WhatsApp",
+      contact_email: "Email",
+      wa_text: "Olá, Guilherme! Vi seu portfólio e gostaria de conversar.",
+      email_subject: "Contato via portfólio",
       st_live: "em produção", st_dev: "em evolução",
     },
     en: {
       nav_experience: "Experience", nav_stack: "Stack", nav_projects: "Projects", nav_approach: "How I work",
       hero_eyebrow: "Senior Software Engineer",
       hero_role: "Full-stack · Angular & TypeScript",
-      hero_lede: "Full-stack engineer with 5+ years building web applications — Angular on the front, Node.js/REST on the back. I'm a front-end technical lead for a U.S. client and, in parallel, I design and operate my own ecosystem of self-hosted services that keeps me hands-on across the entire stack.",
-      hero_m1: "Curitiba, Brazil", hero_m2: "Front-end technical lead", hero_m3: "Own self-hosted infra",
+      hero_lede: "Full-stack engineer with 5+ years building web applications — Angular on the front, Node.js/REST on the back. I work for a U.S. client, where I acted as tech lead on the Outage Scoping Optimization project, and in parallel I design and operate my own ecosystem of self-hosted services that keeps me hands-on across the entire stack.",
+      hero_m1: "Curitiba, Brazil", hero_m2: "Tech lead — Outage Scoping Optimization", hero_m3: "Own self-hosted infra",
       stats: [["5+","Years of experience"],["15+","Applications of my own"],["7","Technical domains"],["1","Homelab operated"]],
       exp_eyebrow: "Professional experience",
-      exp_title: "Technical leadership on a mission-critical product",
-      exp_sub: "Over five years shipping software to production, currently as a front-end technical lead for a client in the United States.",
+      exp_title: "Shipping a mission-critical product for a U.S. client",
+      exp_sub: "Over five years shipping software to production for a client in the United States, where I took on the tech lead role for the Outage Scoping Optimization project.",
       stack_eyebrow: "Technical stack",
       stack_title: "A stack that reaches from screen to server",
       stack_sub: "Angular and TypeScript at the core, surrounded by everything needed to ship a product and keep it alive — infrastructure included.",
@@ -415,6 +481,14 @@
       appr_title: "Principles that run through every project",
       foot_note: "A personal software ecosystem — designed, built and operated from scratch. No sensitive infrastructure details are exposed here.",
       foot_tag: "Open to conversations",
+      nav_contact: "Contact",
+      contact_eyebrow: "Contact",
+      contact_title: "Let's talk",
+      contact_sub: "Open to opportunities, collaborations and technical exchanges. Reach out on WhatsApp or drop me an email.",
+      contact_wa: "WhatsApp",
+      contact_email: "Email",
+      wa_text: "Hi Guilherme! I saw your portfolio and would like to talk.",
+      email_subject: "Contact via portfolio",
       st_live: "in production", st_dev: "evolving",
     }
   };
@@ -563,29 +637,38 @@
       company:"TATA Consultancy Services",
       period_pt:"Jul 2021 – Presente", period_en:"Jul 2021 – Present",
       points_pt:[
-        "Líder técnico de front-end em uma plataforma de missão crítica.",
+        "Atuei como tech lead de front-end no projeto Outage Scoping Optimization.",
         "Angular 14+ com RxJS/Signals e APIs REST em Node.js.",
         "Conduzi migrações de Angular com zero regressões em produção.",
         "Decisões de arquitetura dentro do grupo de liderança técnica.",
         "Entrevistas técnicas, onboarding e mentoria de time.",
         "Testes unitários (Jasmine/Karma) e quality gates no SonarQube.",
+        "IA no fluxo de desenvolvimento desde o Outage Scoping: Devin (com Claude e GPT), GitHub Copilot e outras ferramentas para escrever stories no Jira, automatizar comentários, gerar testes unitários e acelerar a entrega.",
         "CI/CD com GitHub, Jenkins e Jira; rotina em inglês com cliente dos EUA."
       ],
       points_en:[
-        "Front-end technical lead on a mission-critical platform.",
+        "Acted as front-end tech lead on the Outage Scoping Optimization project.",
         "Angular 14+ with RxJS/Signals and Node.js REST APIs.",
         "Led Angular migrations with zero production regressions.",
         "Architecture decisions within the tech leadership group.",
         "Technical interviews, onboarding and team mentoring.",
         "Unit tests (Jasmine/Karma) and SonarQube quality gates.",
+        "AI in the development workflow since Outage Scoping: Devin (with Claude and GPT), GitHub Copilot and other tools to write Jira stories, automate comments, generate unit tests and speed up delivery.",
         "CI/CD with GitHub, Jenkins and Jira; day-to-day in English with a U.S. client."
       ],
-      proj_pt:"Otimização de Escopo de Paradas",
-      proj_en:"Outage Scoping Optimization",
-      proj_desc_pt:"Gerencia paradas (outages) de usinas de energia e gera o conjunto de dados central consumido por outras aplicações.",
-      proj_desc_en:"Manages power-plant outages and generates the core dataset consumed across other applications.",
-      client:"NextERA Energy",
-      tags:["Angular 14+","RxJS","Signals","Node.js","Jenkins","SonarQube","Jira","Scrum"]
+      projects:[
+        { name:"Outage Scoping Optimization",
+          pt:"Gerencia paradas (outages) de usinas de energia e gera o conjunto de dados central consumido por outras aplicações.",
+          en:"Manages power-plant outages and generates the core dataset consumed across other applications." },
+        { name:"Planner & Scheduler",
+          pt:"Planejamento e controle das tarefas de manutenção executadas dentro da usina nuclear. Principal atribuição: implementação da biblioteca DHTMLX Chart, integrando todas as funcionalidades já existentes ao gráfico e habilitando uma nova forma de visualizar o trabalho planejado.",
+          en:"Planning and control of the maintenance tasks executed inside the nuclear power plant. Main contribution: implementing the DHTMLX Chart library, bringing all the pre-existing functionality to work alongside the chart and enabling a new way to visualize the planned work." },
+        { name:"AIC — Asset Information Center", current:true,
+          pt:"Camada core de organização das tarefas: planejamento e gestão dos assets e componentes usados em cada tarefa da planta. Junto ao time, responsável pela modernização e reestruturação de elementos legados da aplicação.",
+          en:"Core layer for task organization: planning and managing the assets and components used in each plant task. Alongside my team, responsible for modernizing and restructuring the application's legacy elements." }
+      ],
+      client:"NextEra Energy",
+      tags:["Angular 14+","RxJS","Signals","Node.js","DHTMLX","Devin / Copilot","Jenkins","SonarQube","Jira"]
     }
   ];
 
@@ -596,7 +679,7 @@
     yr:"2016 – 2024"
   };
 
-  let lang = "pt";
+  let lang = "en";
 
   function esc(s){ return String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
 
@@ -620,7 +703,11 @@
         .map(p => '<li>'+DOT+'<span>'+esc(p)+'</span></li>').join("");
       const tags = e.tags.map(t => '<span class="tag">'+esc(t)+'</span>').join("");
       const clientLbl = lang==="pt" ? "Cliente" : "Client";
-      const projLbl = lang==="pt" ? "Projeto principal" : "Main project";
+      const projLbl = lang==="pt" ? "Projetos no cliente" : "Client projects";
+      const curLbl = lang==="pt" ? "atual" : "current";
+      const projsHtml = e.projects.map(pr =>
+        '<div class="proj-item"><div class="proj-name">'+esc(pr.name)+(pr.current?' <span class="proj-cur">'+esc(curLbl)+'</span>':'')+'</div>'
+        + '<p>'+esc(lang==="pt"?pr.pt:pr.en)+'</p></div>').join("");
       return '<article class="exp">'
         + '<div class="exp-head"><span class="exp-role">'+esc(lang==="pt"?e.role_pt:e.role_en)+'</span>'
         + '<span class="exp-co">'+esc(e.company)+'</span>'
@@ -629,8 +716,7 @@
         + '<ul class="exp-points">'+points+'</ul>'
         + '<div class="exp-side">'
         + '<div class="lbl">'+esc(projLbl)+'</div>'
-        + '<div class="proj-name">'+esc(lang==="pt"?e.proj_pt:e.proj_en)+'</div>'
-        + '<p>'+esc(lang==="pt"?e.proj_desc_pt:e.proj_desc_en)+'</p>'
+        + projsHtml
         + '<div class="client">'+esc(clientLbl)+': <b>'+esc(e.client)+'</b></div>'
         + '</div></div>'
         + '<div class="ptags">'+tags+'</div>'
@@ -684,6 +770,10 @@
       const key = el.getAttribute("data-i18n");
       if (I18N[lang][key] != null && typeof I18N[lang][key] === "string") el.textContent = I18N[lang][key];
     });
+    const wa = document.getElementById("wa-link");
+    if (wa) wa.href = "https://wa.me/5543996190345?text=" + encodeURIComponent(I18N[lang].wa_text);
+    const em = document.getElementById("email-link");
+    if (em) em.href = "mailto:guizcanesin@gmail.com?subject=" + encodeURIComponent(I18N[lang].email_subject);
   }
 
   function setLang(l){
@@ -712,7 +802,7 @@
 
   // init
   (function init(){
-    let l = "pt";
+    let l = "en";
     try { const s = localStorage.getItem("gz.lang"); if (s === "pt" || s === "en") l = s; } catch(e){}
     try { const t = localStorage.getItem("gz.theme"); if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } catch(e){}
     setLang(l);
