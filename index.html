@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Guilherme Zago — Engenheiro de Software Sênior full-stack (Angular & TypeScript). Portfólio bilíngue.">
+<meta name="color-scheme" content="light dark">
+<style>html,body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Guilherme Zago</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --ground: #faf7f1;
+    --surface: #ffffff;
+    --surface-2: #f3eee4;
+    --line: #e3dccd;
+    --ink: #1c1813;
+    --ink-soft: #4c453a;
+    --muted: #857a68;
+    --amber: #b0611a;
+    --amber-soft: #f6ead9;
+    --teal: #0f766e;
+    --teal-soft: #dbeeec;
+    --shadow: 0 1px 2px rgba(28,24,19,.05), 0 12px 30px -18px rgba(28,24,19,.25);
+    --radius: 14px;
+    --maxw: 1120px;
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    --display: 'Archivo', system-ui, sans-serif;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --ground: #12100b;
+      --surface: #1b1811;
+      --surface-2: #221e15;
+      --line: #322c20;
+      --ink: #ece6da;
+      --ink-soft: #c3bbaa;
+      --muted: #8f8474;
+      --amber: #e8974c;
+      --amber-soft: #2a2013;
+      --teal: #47b8ab;
+      --teal-soft: #12241f;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -22px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #12100b;
+    --surface: #1b1811;
+    --surface-2: #221e15;
+    --line: #322c20;
+    --ink: #ece6da;
+    --ink-soft: #c3bbaa;
+    --muted: #8f8474;
+    --amber: #e8974c;
+    --amber-soft: #2a2013;
+    --teal: #47b8ab;
+    --teal-soft: #12241f;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -22px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: 24px; }
+  @media (max-width: 640px){ .wrap { padding-inline: 16px; } }
+
+  a { color: inherit; }
+  h1,h2,h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.05; letter-spacing: -.02em; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .16em; color: var(--amber);
+  }
+
+  /* ---------- top bar ---------- */
+  .bar {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+    background: color-mix(in srgb, var(--ground) 86%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar-in { display: flex; align-items: center; gap: 16px; height: 60px; }
+  .brand { font-family: var(--mono); font-weight: 600; font-size: 14px; letter-spacing: .02em; }
+  .brand b { color: var(--amber); }
+  .bar-spacer { flex: 1; }
+  .navlinks { display: flex; gap: 22px; }
+  .navlinks a {
+    font-family: var(--mono); font-size: 12.5px; text-decoration: none;
+    color: var(--muted); letter-spacing: .03em; transition: color .15s;
+  }
+  .navlinks a:hover { color: var(--ink); }
+  @media (max-width: 820px){ .navlinks { display: none; } }
+
+  .ctl {
+    display: inline-flex; align-items: center; border: 1px solid var(--line);
+    border-radius: 999px; overflow: hidden; background: var(--surface);
+  }
+  .ctl button {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    border: 0; background: transparent; color: var(--muted);
+    padding: 6px 11px; cursor: pointer; transition: all .15s; letter-spacing: .04em;
+  }
+  .ctl button[aria-pressed="true"] { background: var(--amber); color: #fff; }
+  :root[data-theme="dark"] .ctl button[aria-pressed="true"],
+  :root:not([data-theme="light"]) .ctl button[aria-pressed="true"] { color: #1a140c; }
+  .icon-btn {
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft);
+    width: 36px; height: 34px; border-radius: 10px; cursor: pointer; font-size: 15px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  button:focus-visible, a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+  /* ---------- hero ---------- */
+  .hero { padding-block: 72px 40px; position: relative; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.55fr 1fr; gap: 48px; align-items: start;
+  }
+  @media (max-width: 900px){ .hero-grid { grid-template-columns: 1fr; gap: 34px; } }
+  .hero h1 { font-size: clamp(40px, 7vw, 74px); font-weight: 900; margin-top: 14px; }
+  .hero .role { font-family: var(--display); font-weight: 700; font-size: clamp(20px,3vw,26px); color: var(--amber); margin-top: 6px; }
+  .hero .lede { font-size: 18px; color: var(--ink-soft); max-width: 60ch; margin-top: 20px; }
+  .hero .meta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 22px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .hero .meta span { display: inline-flex; align-items: center; gap: 7px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+
+  .panel {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden;
+  }
+  .panel-head {
+    display: flex; align-items: center; gap: 8px; padding: 11px 14px;
+    border-bottom: 1px solid var(--line); background: var(--surface-2);
+    font-family: var(--mono); font-size: 11.5px; color: var(--muted); letter-spacing: .05em;
+  }
+  .tl { display: flex; gap: 6px; margin-right: 4px; }
+  .tl i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+  .tl i:nth-child(1){ background:#e0603f; } .tl i:nth-child(2){ background:#e6a723; } .tl i:nth-child(3){ background:#3fa663; }
+  .code { font-family: var(--mono); font-size: 13px; line-height: 1.85; padding: 16px 16px; overflow-x: auto; }
+  .code .k { color: var(--amber); } .code .s { color: var(--teal); } .code .c { color: var(--muted); }
+  .code .p { color: var(--ink-soft); }
+
+  /* ---------- stats ---------- */
+  .stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-top: 8px; }
+  @media (max-width: 680px){ .stats { grid-template-columns: repeat(2,1fr); } }
+  .stat { background: var(--surface); padding: 22px 20px; }
+  .stat .n { font-family: var(--display); font-weight: 800; font-size: 34px; color: var(--amber); letter-spacing: -.03em; }
+  .stat .l { font-family: var(--mono); font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: 4px; }
+
+  /* ---------- sections ---------- */
+  section { padding-block: 56px; }
+  .sec-head { max-width: 62ch; margin-bottom: 34px; }
+  .sec-head h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; margin-top: 10px; }
+  .sec-head p { color: var(--ink-soft); font-size: 16px; margin-top: 12px; }
+
+  /* stack */
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 16px; }
+  .stack-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .stack-card h3 { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 9px; }
+  .stack-card .ico { font-size: 17px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+  .tag {
+    font-family: var(--mono); font-size: 11.5px; padding: 4px 9px; border-radius: 7px;
+    background: var(--surface-2); border: 1px solid var(--line); color: var(--ink-soft);
+  }
+  .tag.hot { background: var(--amber-soft); border-color: color-mix(in srgb, var(--amber) 30%, var(--line)); color: var(--amber); font-weight: 600; }
+
+  /* projects */
+  .proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 780px){ .proj-grid { grid-template-columns: 1fr; } }
+  .proj {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px; display: flex; flex-direction: column; box-shadow: var(--shadow);
+    transition: transform .18s, border-color .18s;
+  }
+  .proj:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--amber) 40%, var(--line)); }
+  .proj-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .proj-kind { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--teal); font-weight: 600; }
+  .proj-status { font-family: var(--mono); font-size: 10.5px; padding: 3px 8px; border-radius: 999px; letter-spacing: .05em; white-space: nowrap; }
+  .st-live { background: var(--teal-soft); color: var(--teal); }
+  .st-dev { background: var(--amber-soft); color: var(--amber); }
+  .proj h3 { font-size: 21px; font-weight: 800; margin-top: 12px; }
+  .proj .desc { color: var(--ink-soft); font-size: 14.5px; margin-top: 10px; flex: 1; }
+  .proj .highlight { display: flex; gap: 9px; margin-top: 14px; font-size: 13.5px; color: var(--ink-soft); }
+  .proj .highlight svg { flex: none; margin-top: 3px; color: var(--amber); }
+  .proj .ptags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+
+  /* smaller / rnd */
+  .mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; }
+  .mini { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+  .mini h3 { font-size: 15px; font-weight: 700; }
+  .mini p { font-size: 13px; color: var(--ink-soft); margin-top: 7px; }
+  .mini .ptags { margin-top: 12px; }
+
+  /* principles */
+  .prin-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+  @media (max-width: 820px){ .prin-grid { grid-template-columns: 1fr; } }
+  .prin { border-left: 3px solid var(--amber); padding: 4px 0 4px 18px; }
+  .prin .num { font-family: var(--mono); font-size: 12px; color: var(--amber); font-weight: 600; }
+  .prin h3 { font-size: 17px; font-weight: 700; margin-top: 8px; }
+  .prin p { font-size: 14px; color: var(--ink-soft); margin-top: 8px; }
+
+  /* experience */
+  .exp {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .exp-head {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px;
+    padding: 24px 26px 18px; border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--amber-soft), transparent);
+  }
+  .exp-role { font-family: var(--display); font-weight: 800; font-size: clamp(20px,3vw,26px); letter-spacing: -.02em; }
+  .exp-co { font-weight: 600; color: var(--amber); font-size: 16px; }
+  .exp-co::before { content: "·"; margin-right: 12px; color: var(--muted); }
+  .exp-period { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-left: auto; letter-spacing: .03em; white-space: nowrap; }
+  .exp-body { padding: 22px 26px 26px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 30px; }
+  @media (max-width: 780px){ .exp-body { grid-template-columns: 1fr; gap: 22px; } .exp-period { margin-left: 0; width: 100%; } }
+  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .exp-points li { display: flex; gap: 11px; font-size: 14.5px; color: var(--ink-soft); }
+  .exp-points svg { flex: none; margin-top: 4px; color: var(--teal); }
+  .exp-side { border-left: 1px solid var(--line); padding-left: 26px; }
+  @media (max-width: 780px){ .exp-side { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 22px; } }
+  .exp-side .lbl { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+  .exp-side .proj-name { font-family: var(--display); font-weight: 700; font-size: 16px; margin-top: 6px; }
+  .exp-side p { font-size: 13.5px; color: var(--ink-soft); margin-top: 8px; }
+  .exp-side .client { display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; font-family: var(--mono); font-size: 12px; color: var(--ink); }
+  .exp-side .client b { color: var(--teal); }
+  .exp .ptags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 26px 24px; }
+
+  .edu {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-top: 18px;
+    padding: 18px 22px; border: 1px dashed var(--line); border-radius: 12px; background: var(--surface);
+  }
+  .edu .lbl { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--amber); }
+  .edu .deg { font-family: var(--display); font-weight: 700; font-size: 16px; }
+  .edu .school { color: var(--ink-soft); font-size: 14px; }
+  .edu .yr { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-left: auto; }
+  @media (max-width: 560px){ .edu .yr { margin-left: 0; } }
+
+  /* footer */
+  footer { border-top: 1px solid var(--line); padding-block: 40px 56px; }
+  .foot-in { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
+  .foot-note { font-family: var(--mono); font-size: 12px; color: var(--muted); max-width: 52ch; line-height: 1.7; }
+
+  [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: reduce){ * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="wrap bar-in">
+    <div class="brand">az<b>zog</b>&nbsp;/&nbsp;gz</div>
+    <div class="bar-spacer"></div>
+    <nav class="navlinks">
+      <a href="#experience" data-i18n="nav_experience">Experiência</a>
+      <a href="#stack" data-i18n="nav_stack">Stack</a>
+      <a href="#projects" data-i18n="nav_projects">Projetos</a>
+      <a href="#approach" data-i18n="nav_approach">Como trabalho</a>
+    </nav>
+    <div class="ctl" role="group" aria-label="Language">
+      <button id="lang-pt" aria-pressed="true">PT</button>
+      <button id="lang-en" aria-pressed="false">EN</button>
+    </div>
+    <button class="icon-btn" id="theme-btn" aria-label="Toggle theme">◐</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow" data-i18n="hero_eyebrow">Desenvolvedor de Software Sênior</div>
+      <h1>Guilherme Zago</h1>
+      <div class="role" data-i18n="hero_role">Full-stack · Angular &amp; TypeScript</div>
+      <p class="lede" data-i18n="hero_lede"></p>
+      <div class="meta">
+        <span><span class="dot"></span><span data-i18n="hero_m1">Curitiba, Brasil</span></span>
+        <span><span class="dot"></span><span data-i18n="hero_m2">Líder técnico de front-end</span></span>
+        <span><span class="dot"></span><span data-i18n="hero_m3">Infra self-hosted própria</span></span>
+      </div>
+    </div>
+    <div class="panel" aria-hidden="true">
+      <div class="panel-head"><span class="tl"><i></i><i></i><i></i></span> developer.profile.ts</div>
+      <div class="code">
+<span class="k">const</span> <span class="p">engineer</span> = {<br>
+&nbsp;&nbsp;role: <span class="s">'Senior Software Engineer'</span>,<br>
+&nbsp;&nbsp;core: [<span class="s">'Angular'</span>, <span class="s">'TypeScript'</span>, <span class="s">'Node'</span>],<br>
+&nbsp;&nbsp;spans: [<span class="s">'frontend'</span>, <span class="s">'backend'</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s">'infra'</span>, <span class="s">'firmware'</span>],<br>
+&nbsp;&nbsp;runs: <span class="s">'a self-hosted homelab'</span>,<br>
+&nbsp;&nbsp;<span class="c">// ships end-to-end, alone</span><br>
+&nbsp;&nbsp;shipsAlone: <span class="k">true</span>,<br>
+};
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="stats" id="stats"></div></div>
+</header>
+
+<main>
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow" data-i18n="exp_eyebrow">Experiência profissional</div>
+        <h2 data-i18n="exp_title">Liderança técnica em produto de missão crítica</h2>
+        <p data-i18n="exp_sub">Mais de cinco anos entregando software para produção, atualmente como líder técnico de front-end para um cliente nos Estados Unidos.</p>
+      </div>
+      <div id="exp-list"></div>
+      <div id="edu-block"></div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow" data-i18n="stack_eyebrow">Stack técnico</div>
+        <h2 data-i18n="stack_title">Uma stack que vai da tela ao servidor</h2>
+        <p data-i18n="stack_sub">Angular e TypeScript no centro, cercados por tudo que é preciso para colocar um produto no ar e mantê-lo — inclusive a infraestrutura.</p>
+      </div>
+      <div class="stack-grid" id="stack-grid"></div>
+    </div>
+  </section>
+
+  <section id="projects" style="background:var(--surface-2);">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow" data-i18n="proj_eyebrow">Projetos em destaque</div>
+        <h2 data-i18n="proj_title">Aplicações construídas de ponta a ponta</h2>
+        <p data-i18n="proj_sub">Uma seleção do ecossistema que projeto, desenvolvo e opero. Cada uma foi levada do primeiro commit ao deploy em produção.</p>
+      </div>
+      <div class="proj-grid" id="proj-grid"></div>
+
+      <div class="sec-head" style="margin-top:52px;">
+        <div class="eyebrow" data-i18n="mini_eyebrow">Também no portfólio · P&amp;D</div>
+        <h2 data-i18n="mini_title" style="font-size:24px;">Experimentos e projetos menores</h2>
+      </div>
+      <div class="mini-grid" id="mini-grid"></div>
+    </div>
+  </section>
+
+  <section id="approach">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow" data-i18n="appr_eyebrow">Como trabalho</div>
+        <h2 data-i18n="appr_title">Princípios que atravessam todos os projetos</h2>
+      </div>
+      <div class="prin-grid" id="prin-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>
+      <div class="brand" style="font-size:16px;">Guilherme Zago</div>
+      <p class="foot-note" data-i18n="foot_note" style="margin-top:8px;"></p>
+    </div>
+    <div class="eyebrow" data-i18n="foot_tag">Disponível para conversas</div>
+  </div>
+</footer>
+
+<script>
+  "use strict";
+
+  const I18N = {
+    pt: {
+      nav_experience: "Experiência", nav_stack: "Stack", nav_projects: "Projetos", nav_approach: "Como trabalho",
+      hero_eyebrow: "Engenheiro de Software Sênior",
+      hero_role: "Full-stack · Angular & TypeScript",
+      hero_lede: "Engenheiro full-stack com mais de 5 anos construindo aplicações web — Angular no front, Node.js/REST no back. Sou líder técnico de front-end para um cliente nos EUA e, em paralelo, projeto e opero um ecossistema próprio de serviços self-hosted que me mantém hands-on em toda a stack.",
+      hero_m1: "Curitiba, Brasil", hero_m2: "Líder técnico de front-end", hero_m3: "Infra self-hosted própria",
+      stats: [["5+","Anos de experiência"],["15+","Aplicações próprias"],["7","Domínios técnicos"],["1","Homelab operado"]],
+      exp_eyebrow: "Experiência profissional",
+      exp_title: "Liderança técnica em produto de missão crítica",
+      exp_sub: "Mais de cinco anos entregando software para produção, atualmente como líder técnico de front-end para um cliente nos Estados Unidos.",
+      stack_eyebrow: "Stack técnico",
+      stack_title: "Uma stack que vai da tela ao servidor",
+      stack_sub: "Angular e TypeScript no centro, cercados por tudo que é preciso para colocar um produto no ar e mantê-lo — inclusive a infraestrutura.",
+      proj_eyebrow: "Projetos em destaque",
+      proj_title: "Aplicações construídas de ponta a ponta",
+      proj_sub: "Uma seleção do ecossistema que projeto, desenvolvo e opero. Cada uma foi levada do primeiro commit ao deploy em produção.",
+      mini_eyebrow: "Também no portfólio · P&D",
+      mini_title: "Experimentos e projetos menores",
+      appr_eyebrow: "Como trabalho",
+      appr_title: "Princípios que atravessam todos os projetos",
+      foot_note: "Ecossistema pessoal de software — projetado, desenvolvido e operado do zero. Nenhum detalhe de infraestrutura sensível é exposto aqui.",
+      foot_tag: "Disponível para conversas",
+      st_live: "em produção", st_dev: "em evolução",
+    },
+    en: {
+      nav_experience: "Experience", nav_stack: "Stack", nav_projects: "Projects", nav_approach: "How I work",
+      hero_eyebrow: "Senior Software Engineer",
+      hero_role: "Full-stack · Angular & TypeScript",
+      hero_lede: "Full-stack engineer with 5+ years building web applications — Angular on the front, Node.js/REST on the back. I'm a front-end technical lead for a U.S. client and, in parallel, I design and operate my own ecosystem of self-hosted services that keeps me hands-on across the entire stack.",
+      hero_m1: "Curitiba, Brazil", hero_m2: "Front-end technical lead", hero_m3: "Own self-hosted infra",
+      stats: [["5+","Years of experience"],["15+","Applications of my own"],["7","Technical domains"],["1","Homelab operated"]],
+      exp_eyebrow: "Professional experience",
+      exp_title: "Technical leadership on a mission-critical product",
+      exp_sub: "Over five years shipping software to production, currently as a front-end technical lead for a client in the United States.",
+      stack_eyebrow: "Technical stack",
+      stack_title: "A stack that reaches from screen to server",
+      stack_sub: "Angular and TypeScript at the core, surrounded by everything needed to ship a product and keep it alive — infrastructure included.",
+      proj_eyebrow: "Featured projects",
+      proj_title: "Applications built end to end",
+      proj_sub: "A curated slice of the ecosystem I design, build and operate. Each one taken from the first commit to a production deployment.",
+      mini_eyebrow: "Also in the portfolio · R&D",
+      mini_title: "Experiments and smaller builds",
+      appr_eyebrow: "How I work",
+      appr_title: "Principles that run through every project",
+      foot_note: "A personal software ecosystem — designed, built and operated from scratch. No sensitive infrastructure details are exposed here.",
+      foot_tag: "Open to conversations",
+      st_live: "in production", st_dev: "evolving",
+    }
+  };
+
+  const STACK = [
+    { ico:"🎨", pt:"Frontend", en:"Frontend",
+      tags:[["Angular",1],["Signals",1],["Zoneless",0],["RxJS",0],["React",0],["React Native",0],["TypeScript",1],["Tailwind",0],["Angular CDK",0],["PWA",0],["SVG dataviz",0]] },
+    { ico:"⚙️", pt:"Backend & APIs", en:"Backend & APIs",
+      tags:[["Node.js",1],["Express",1],["NestJS",0],["TypeScript",1],["Zod",0],["TypeORM",0],["Drizzle",0],["BullMQ",0],["Redis",0],["JWT / argon2",0],["REST",0],["SSE",0]] },
+    { ico:"🗄️", pt:"Dados", en:"Data",
+      tags:[["PostgreSQL",1],["SQLite",0],["Supabase",0]] },
+    { ico:"🐳", pt:"Infra & DevOps", en:"Infra & DevOps",
+      tags:[["Docker",1],["Docker Compose",1],["Caddy",0],["Cloudflare Tunnel",0],["GitOps",0],["CI/CD",0],["Self-hosted runners",0],["Linux",0],["systemd",0]] },
+    { ico:"☁️", pt:"Cloud", en:"Cloud",
+      tags:[["AWS Lambda",0],["Serverless",0]] },
+    { ico:"🔌", pt:"Embarcados & IoT", en:"Embedded & IoT",
+      tags:[["C++17",0],["PlatformIO",0],["ESP8266 / ESP32",0],["Arduino",0],["BLE",0],["ESC/POS",0],["Python",0]] },
+    { ico:"🤖", pt:"IA & Integrações", en:"AI & Integrations",
+      tags:[["Claude API",0],["ElevenLabs",0],["Shotstack",0],["Ollama",0],["Puppeteer",0]] },
+    { ico:"🖥️", pt:"Desktop", en:"Desktop",
+      tags:[[".NET 8",0],["WinForms",0],["Windows CfAPI",0]] },
+  ];
+
+  const PROJECTS = [
+    {
+      kind_pt:"Finanças pessoais", kind_en:"Personal finance", status:"live",
+      name:"AccountingManager",
+      pt:"Gestor completo de finanças e investimentos, com razão de dupla entrada, importação em lote de extratos e um painel analítico interativo por período.",
+      en:"A complete finance and investment manager, with a double-entry ledger, batch import of brokerage statements and an interactive analytics dashboard by date range.",
+      hi_pt:"Cotações de ações, ETFs e FIIs ao vivo, tratamento de eventos societários (desdobramentos, troca de ticker) e gráficos em SVG puro, sem nenhuma dependência.",
+      hi_en:"Live pricing for stocks, ETFs and REITs, corporate-action handling (splits, ticker changes) and charts drawn in pure SVG with zero dependencies.",
+      tags:["Angular","NestJS","PostgreSQL","TypeORM","SVG charts"]
+    },
+    {
+      kind_pt:"Automação com IA", kind_en:"AI automation", status:"live",
+      name:"AutomatedContentWorkflow",
+      pt:"Pipeline que transforma um tema em vídeo curto vertical automaticamente: roteiro por LLM, B-roll, narração com legenda palavra a palavra e renderização final.",
+      en:"A pipeline that turns a topic into a vertical short automatically: LLM script, B-roll, AI voiceover with word-level captions and a final rendered video.",
+      hi_pt:"Orquestração idempotente com filas e retries, portão humano de aprovação, rastreio de custo por vídeo e publicação automática. Passou por auditoria de segurança.",
+      hi_en:"Idempotent queue orchestration with retries, a human approval gate, per-video cost tracking and automatic publishing. Passed a security audit.",
+      tags:["Express","TypeScript","BullMQ","Redis","Claude API","Angular"]
+    },
+    {
+      kind_pt:"Ticketing & PDV", kind_en:"Ticketing & POS", status:"live",
+      name:"ZogManager",
+      pt:"Plataforma de venda de ingressos e ponto de venda para eventos, web e mobile, com impressão térmica de cupons e QR codes.",
+      en:"An event ticketing and point-of-sale platform, web and mobile, with thermal receipt and QR-code printing.",
+      hi_pt:"Motor de impressão ESC/POS multi-perfil com QR e código lado a lado, reconexão automática e um agente de impressão local que contorna limitações do Bluetooth no navegador.",
+      hi_en:"A multi-profile ESC/POS print engine with QR and code side by side, auto-reconnect and a local print agent that works around browser Bluetooth limits.",
+      tags:["React","React Native","TypeScript","BLE","ESC/POS","Python"]
+    },
+    {
+      kind_pt:"Plataforma de ops", kind_en:"Ops platform", status:"live",
+      name:"HomeLab Control Panel",
+      pt:"Painel de controle da minha própria infraestrutura: faz deploy de aplicações, configura variáveis e gerencia runners de CI inteiramente pela interface, sem SSH.",
+      en:"A control panel for my own infrastructure: it deploys applications, configures environment variables and manages CI runners entirely from the UI, no SSH.",
+      hi_pt:"Diagrama de arquitetura 100% dinâmico, inferido em tempo real a partir dos contêineres, com execução de jobs transmitida ao vivo e modelo robusto contra injeção.",
+      hi_en:"A 100% dynamic architecture diagram inferred live from the running containers, with job execution streamed in real time and a hardened anti-injection model.",
+      tags:["Angular","Express","Docker","SSE","GitOps"]
+    },
+    {
+      kind_pt:"Suíte de negócio", kind_en:"Business suite", status:"live",
+      name:"Gingger Suite",
+      pt:"Suíte para um negócio de corte a laser: catálogo público de produtos, motor de cálculo de custo (corte, material e gravação) e módulo financeiro com razão contábil.",
+      en:"A suite for a laser-cutting business: a public product catalog, a cost-calculation engine (cut, material and engraving) and a financial ledger module.",
+      hi_pt:"O catálogo público serve uma cópia somente-leitura do banco, garantindo exposição pública sem qualquer escrita no banco de dados vivo. Auditado.",
+      hi_en:"The public catalog serves a read-only snapshot of the database, guaranteeing public exposure with no writes to the live database. Security-audited.",
+      tags:["Express","TypeScript","SQLite","Docker"]
+    },
+    {
+      kind_pt:"App de viagens", kind_en:"Travel app", status:"dev",
+      name:"TripPlanner",
+      pt:"Planejador de viagens em monorepo: busca livre de destinos, painéis de país com dados de fontes abertas e mapa com roteiro de visita otimizado por dia.",
+      en:"A travel planner in a monorepo: free-text destination search, country panels backed by open data and a map with an optimized daily visit route.",
+      hi_pt:"Angular zoneless + Tailwind no front, Express 5 + Drizzle ORM no back, autenticação JWT completa e todos os pontos de interesse carregados dinamicamente com cache.",
+      hi_en:"Zoneless Angular + Tailwind on the front, Express 5 + Drizzle ORM on the back, full JWT auth and all points of interest loaded dynamically with caching.",
+      tags:["Angular 22","Express 5","Drizzle","JWT","pnpm monorepo"]
+    },
+    {
+      kind_pt:"Nuvem pessoal", kind_en:"Personal cloud", status:"dev",
+      name:"CloudConnect",
+      pt:"Nuvem pessoal estilo OneDrive para a rede local, com cliente nativo para Windows e sincronização bidirecional de arquivos.",
+      en:"A OneDrive-style personal cloud for the local network, with a native Windows client and two-way file sync.",
+      hi_pt:"Cliente em .NET 8 com engine de sincronização própria e hidratação sob demanda via Windows Cloud Filter API, sobre uma API de arquivos em Express com suporte a Range.",
+      hi_en:"A .NET 8 client with a custom sync engine and on-demand hydration via the Windows Cloud Filter API, over an Express file API with Range support.",
+      tags:[".NET 8","WinForms","Windows CfAPI","Express","TypeScript"]
+    },
+    {
+      kind_pt:"Firmware embarcado", kind_en:"Embedded firmware", status:"live",
+      name:"Embedded Firmware",
+      pt:"Firmware de nível de produção para microcontroladores ESP8266 e Arduino, escrito em C++ orientado a objetos seguindo princípios SOLID.",
+      en:"Production-grade firmware for ESP8266 and Arduino microcontrollers, written in object-oriented C++ following SOLID principles.",
+      hi_pt:"Inversão de dependência por interfaces, máquinas de estado duplas, temporização não bloqueante e verificações de segurança contínuas — portável entre ESP8266 e AVR.",
+      hi_en:"Interface-based dependency inversion, dual state machines, non-blocking timing and continuous safety checks — portable across ESP8266 and AVR.",
+      tags:["C++17","PlatformIO","ESP8266","Arduino"]
+    },
+  ];
+
+  const MINI = [
+    { name:"CodeQ", status:"live",
+      pt:"Encurtador de URLs com geração de QR code, com códigos otimizados para o modo de codificação alfanumérico.",
+      en:"A URL shortener with QR-code generation, using short codes optimized for the alphanumeric encoding mode.",
+      tags:["Node","Express","SQLite"] },
+    { name:"RIRWatcher", status:"live",
+      pt:"Monitor de disponibilidade de ingressos de show que dispara notificações em grupo de WhatsApp; containerizado com execução agendada.",
+      en:"A concert-ticket availability monitor that fires WhatsApp group notifications; containerized with scheduled runs.",
+      tags:["Node ESM","Puppeteer","Docker"] },
+    { name:"ConceptCondo", status:"dev",
+      pt:"Sistema de gestão de condomínios full-stack, com app web e mobile sobre funções serverless.",
+      en:"A full-stack condominium management system, with web and mobile apps over serverless functions.",
+      tags:["React","React Native","AWS Lambda","Supabase"] },
+    { name:"RuView", status:"dev",
+      pt:"Pesquisa de sensoriamento por WiFi (CSI) sem câmera com ESP32-S3, integrado a um front-end em tempo real.",
+      en:"Camera-free WiFi (CSI) sensing research with ESP32-S3, integrated with a real-time front-end.",
+      tags:["ESP32-S3","WebSocket","Angular"] },
+    { name:"SVG Label Editor", status:"dev",
+      pt:"Editor de etiquetas SVG offline, em arquivo único no navegador, com motor de texto próprio (quebra de linha e auto-ajuste).",
+      en:"An offline, single-file in-browser SVG label editor with a custom text engine (word-wrap and auto-shrink).",
+      tags:["SVG","TypeScript","Offline"] },
+  ];
+
+  const PRIN = [
+    { pt_h:"Progresso incremental e validado", en_h:"Incremental, validated progress",
+      pt:"Prefiro avançar em passos pequenos e verificados a entregar tudo de uma vez. Cada mudança é conferida antes da próxima.",
+      en:"I prefer moving in small, verified steps over shipping everything at once. Each change is checked before the next." },
+    { pt_h:"Padrões consistentes", en_h:"Consistent conventions",
+      pt:"Convenções fixas entre projetos — mesma estrutura de módulos no backend, mesmo padrão de componentes no Angular — para que qualquer app seja familiar.",
+      en:"Fixed conventions across projects — the same backend module structure, the same Angular component pattern — so any app feels familiar." },
+    { pt_h:"Segurança levada a sério", en_h:"Security taken seriously",
+      pt:"Auditorias de segurança recorrentes: rate limiting, cabeçalhos, tratamento de tokens, defesa contra injeção e exposição pública sem escrita no banco vivo.",
+      en:"Recurring security audits: rate limiting, headers, token handling, injection defense and public exposure with no writes to the live database." },
+    { pt_h:"Do código à operação", en_h:"From code to operation",
+      pt:"Não paro no merge. Projeto o deploy, cuido da infraestrutura em contêineres e opero as aplicações em produção no dia a dia.",
+      en:"I don't stop at merge. I design the deployment, run the containerized infrastructure and operate the applications in production day to day." },
+    { pt_h:"Arquitetura pensada para crescer", en_h:"Architecture built to grow",
+      pt:"Interfaces, inversão de dependência e pontos de extensão previstos — do firmware embarcado às APIs — para adicionar recursos sem reescrever o que já existe.",
+      en:"Interfaces, dependency inversion and planned extension points — from embedded firmware to APIs — to add features without rewriting what exists." },
+    { pt_h:"Comunicação técnica e direta", en_h:"Direct, technical communication",
+      pt:"Avaliações honestas em vez de linguagem de marketing. Digo o que funciona, o que ainda não, e por quê.",
+      en:"Honest assessments over marketing language. I say what works, what doesn't yet, and why." },
+  ];
+
+  const EXPERIENCE = [
+    {
+      role_pt:"Engenheiro de Software Sênior", role_en:"Senior Software Engineer",
+      company:"TATA Consultancy Services",
+      period_pt:"Jul 2021 – Presente", period_en:"Jul 2021 – Present",
+      points_pt:[
+        "Líder técnico de front-end em uma plataforma de missão crítica.",
+        "Angular 14+ com RxJS/Signals e APIs REST em Node.js.",
+        "Conduzi migrações de Angular com zero regressões em produção.",
+        "Decisões de arquitetura dentro do grupo de liderança técnica.",
+        "Entrevistas técnicas, onboarding e mentoria de time.",
+        "Testes unitários (Jasmine/Karma) e quality gates no SonarQube.",
+        "CI/CD com GitHub, Jenkins e Jira; rotina em inglês com cliente dos EUA."
+      ],
+      points_en:[
+        "Front-end technical lead on a mission-critical platform.",
+        "Angular 14+ with RxJS/Signals and Node.js REST APIs.",
+        "Led Angular migrations with zero production regressions.",
+        "Architecture decisions within the tech leadership group.",
+        "Technical interviews, onboarding and team mentoring.",
+        "Unit tests (Jasmine/Karma) and SonarQube quality gates.",
+        "CI/CD with GitHub, Jenkins and Jira; day-to-day in English with a U.S. client."
+      ],
+      proj_pt:"Otimização de Escopo de Paradas",
+      proj_en:"Outage Scoping Optimization",
+      proj_desc_pt:"Gerencia paradas (outages) de usinas de energia e gera o conjunto de dados central consumido por outras aplicações.",
+      proj_desc_en:"Manages power-plant outages and generates the core dataset consumed across other applications.",
+      client:"NextERA Energy",
+      tags:["Angular 14+","RxJS","Signals","Node.js","Jenkins","SonarQube","Jira","Scrum"]
+    }
+  ];
+
+  const EDUCATION = {
+    deg_pt:"Bacharelado em Ciência da Computação", deg_en:"B.Sc. in Computer Science",
+    school_pt:"UTFPR — Universidade Tecnológica Federal do Paraná",
+    school_en:"UTFPR — Federal University of Technology, Paraná",
+    yr:"2016 – 2024"
+  };
+
+  let lang = "pt";
+
+  function esc(s){ return String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+  function statusBadge(status){
+    const t = I18N[lang][status === "live" ? "st_live" : "st_dev"];
+    const cls = status === "live" ? "st-live" : "st-dev";
+    return '<span class="proj-status '+cls+'">'+esc(t)+'</span>';
+  }
+
+  function renderStats(){
+    document.getElementById("stats").innerHTML = I18N[lang].stats
+      .map(s => '<div class="stat"><div class="n">'+esc(s[0])+'</div><div class="l">'+esc(s[1])+'</div></div>')
+      .join("");
+  }
+
+  const DOT = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>';
+
+  function renderExperience(){
+    document.getElementById("exp-list").innerHTML = EXPERIENCE.map(e => {
+      const points = (lang==="pt"?e.points_pt:e.points_en)
+        .map(p => '<li>'+DOT+'<span>'+esc(p)+'</span></li>').join("");
+      const tags = e.tags.map(t => '<span class="tag">'+esc(t)+'</span>').join("");
+      const clientLbl = lang==="pt" ? "Cliente" : "Client";
+      const projLbl = lang==="pt" ? "Projeto principal" : "Main project";
+      return '<article class="exp">'
+        + '<div class="exp-head"><span class="exp-role">'+esc(lang==="pt"?e.role_pt:e.role_en)+'</span>'
+        + '<span class="exp-co">'+esc(e.company)+'</span>'
+        + '<span class="exp-period">'+esc(lang==="pt"?e.period_pt:e.period_en)+'</span></div>'
+        + '<div class="exp-body">'
+        + '<ul class="exp-points">'+points+'</ul>'
+        + '<div class="exp-side">'
+        + '<div class="lbl">'+esc(projLbl)+'</div>'
+        + '<div class="proj-name">'+esc(lang==="pt"?e.proj_pt:e.proj_en)+'</div>'
+        + '<p>'+esc(lang==="pt"?e.proj_desc_pt:e.proj_desc_en)+'</p>'
+        + '<div class="client">'+esc(clientLbl)+': <b>'+esc(e.client)+'</b></div>'
+        + '</div></div>'
+        + '<div class="ptags">'+tags+'</div>'
+        + '</article>';
+    }).join("");
+
+    const eduLbl = lang==="pt" ? "Formação" : "Education";
+    document.getElementById("edu-block").innerHTML =
+      '<div class="edu"><span class="lbl">'+esc(eduLbl)+'</span>'
+      + '<span class="deg">'+esc(lang==="pt"?EDUCATION.deg_pt:EDUCATION.deg_en)+'</span>'
+      + '<span class="school">'+esc(lang==="pt"?EDUCATION.school_pt:EDUCATION.school_en)+'</span>'
+      + '<span class="yr">'+esc(EDUCATION.yr)+'</span></div>';
+  }
+
+  function renderStack(){
+    document.getElementById("stack-grid").innerHTML = STACK.map(g => {
+      const tags = g.tags.map(t => '<span class="tag'+(t[1]?' hot':'')+'">'+esc(t[0])+'</span>').join("");
+      return '<div class="stack-card"><h3><span class="ico">'+g.ico+'</span>'+esc(g[lang])+'</h3><div class="tags">'+tags+'</div></div>';
+    }).join("");
+  }
+
+  const ARROW = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  function renderProjects(){
+    document.getElementById("proj-grid").innerHTML = PROJECTS.map(p => {
+      const tags = p.tags.map(t => '<span class="tag">'+esc(t)+'</span>').join("");
+      return '<article class="proj">'
+        + '<div class="proj-top"><span class="proj-kind">'+esc(lang==="pt"?p.kind_pt:p.kind_en)+'</span>'+statusBadge(p.status)+'</div>'
+        + '<h3>'+esc(p.name)+'</h3>'
+        + '<p class="desc">'+esc(lang==="pt"?p.pt:p.en)+'</p>'
+        + '<div class="highlight">'+ARROW+'<span>'+esc(lang==="pt"?p.hi_pt:p.hi_en)+'</span></div>'
+        + '<div class="ptags">'+tags+'</div>'
+        + '</article>';
+    }).join("");
+
+    document.getElementById("mini-grid").innerHTML = MINI.map(m => {
+      const tags = m.tags.map(t => '<span class="tag">'+esc(t)+'</span>').join("");
+      return '<article class="mini"><div class="proj-top"><h3>'+esc(m.name)+'</h3>'+statusBadge(m.status)+'</div>'
+        + '<p>'+esc(lang==="pt"?m.pt:m.en)+'</p><div class="ptags">'+tags+'</div></article>';
+    }).join("");
+  }
+
+  function renderPrin(){
+    document.getElementById("prin-grid").innerHTML = PRIN.map((p,i) => {
+      return '<div class="prin"><div class="num">0'+(i+1)+'</div><h3>'+esc(lang==="pt"?p.pt_h:p.en_h)+'</h3><p>'+esc(lang==="pt"?p.pt:p.en)+'</p></div>';
+    }).join("");
+  }
+
+  function applyI18n(){
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (I18N[lang][key] != null && typeof I18N[lang][key] === "string") el.textContent = I18N[lang][key];
+    });
+  }
+
+  function setLang(l){
+    lang = l;
+    document.getElementById("lang-pt").setAttribute("aria-pressed", String(l==="pt"));
+    document.getElementById("lang-en").setAttribute("aria-pressed", String(l==="en"));
+    try { document.documentElement.lang = (l==="pt"?"pt-BR":"en"); } catch(e){}
+    applyI18n(); renderStats(); renderExperience(); renderStack(); renderProjects(); renderPrin();
+    try { localStorage.setItem("gz.lang", l); } catch(e){}
+  }
+
+  // theme
+  function currentTheme(){
+    const attr = document.documentElement.getAttribute("data-theme");
+    if (attr) return attr;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  document.getElementById("theme-btn").addEventListener("click", () => {
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("gz.theme", next); } catch(e){}
+  });
+
+  document.getElementById("lang-pt").addEventListener("click", () => setLang("pt"));
+  document.getElementById("lang-en").addEventListener("click", () => setLang("en"));
+
+  // init
+  (function init(){
+    let l = "pt";
+    try { const s = localStorage.getItem("gz.lang"); if (s === "pt" || s === "en") l = s; } catch(e){}
+    try { const t = localStorage.getItem("gz.theme"); if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } catch(e){}
+    setLang(l);
+  })();
+</script>
+</body>
+</html>
