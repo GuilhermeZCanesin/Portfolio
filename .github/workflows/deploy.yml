@@ -1,0 +1,29 @@
+name: Deploy Portfolio
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Pull latest code
+        run: |
+          cd /data/apps/portfolio/Portfolio
+          git fetch origin
+          git reset --hard "origin/$(git rev-parse --abbrev-ref HEAD)"
+
+      - name: Rebuild and restart containers
+        run: |
+          cd /data/apps/portfolio
+          docker compose up -d --build
+
+      - name: Show status
+        run: |
+          sleep 5
+          cd /data/apps/portfolio
+          docker compose ps
+
+      - name: Cleanup old images
+        run: docker image prune -f
